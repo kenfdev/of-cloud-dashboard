@@ -1,0 +1,13 @@
+.navbar-brand {
+  padding: 10px;
+}
+
+.navbar-brand img {
+  height: 30px
+}
+
+@media (min-width: 768px) {
+  .navbar-text {
+    margin-left: 5px;
+  }
+}
