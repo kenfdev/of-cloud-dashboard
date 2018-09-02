@@ -1,9 +1,25 @@
+.navbar-inverse {
+  background-color: #2196f3;
+  border-color: #2196f3;
+}
+
+.navbar-inverse .navbar-text {
+  color: #fff;
+}
+
+.navbar-inverse .navbar-nav > .active > a,
+.navbar-inverse .navbar-nav > .active > a:hover,
+.navbar-inverse .navbar-nav > .active > a:focus {
+  color: #9cd3ff;
+  background-color: #0c7cd5;
+}
+
 .navbar-brand {
   padding: 10px;
 }
 
 .navbar-brand img {
-  height: 30px
+  height: 30px;
 }
 
 @media (min-width: 768px) {

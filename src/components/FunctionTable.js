@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './FunctionTable.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { Link } from 'react-router-dom';
 
@@ -26,12 +27,12 @@ function renderBody(fns) {
           </td>
           <td>
             <a href={endpoint}>
-              <span className="glyphicon glyphicon-link" />
+              <FontAwesomeIcon icon="link" />
             </a>
           </td>
           <td>
             <Link to={logPath}>
-              <span className="glyphicon glyphicon-folder-open" />
+              <FontAwesomeIcon icon="folder-open" />
             </Link>
           </td>
           <td>{shortSha}</td>
