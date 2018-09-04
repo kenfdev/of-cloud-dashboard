@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import queryString from 'query-string';
 import AceEditor from 'react-ace';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import 'brace/mode/sh';
 import 'brace/theme/monokai';
@@ -44,7 +45,13 @@ export class FunctionLogPage extends Component {
       },
     };
 
-    const panelBody = this.state.isLoading ? <div>Loading...</div> : <AceEditor {...editorOptions} value={this.state.log} />;
+    const panelBody = this.state.isLoading ? (
+      <div style={{ textAlign: 'center' }}>
+        <FontAwesomeIcon icon="spinner" spin />{' '}
+      </div>
+    ) : (
+      <AceEditor {...editorOptions} value={this.state.log} />
+    );
     return (
       <div className="panel panel-success">
         <div className="panel-heading">

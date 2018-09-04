@@ -7,25 +7,26 @@ import { NavBar } from './components/NavBar';
 import { FunctionsOverviewPage } from './pages/FunctionsOverviewPage';
 import { FunctionLogPage } from './pages/FunctionLogPage';
 import { NotFoundPage } from './pages/NotFoundPage';
+import { Breadcrumbs } from './components/Breadcrumbs';
 
 export class App extends Component {
   render() {
     return (
-      <div className="container">
-        <NavBar />
-        <BrowserRouter>
+      <BrowserRouter>
+        <div className="container">
+          <NavBar />
           <div>
             <Switch>
-              <Route exact path="/:userId/overview" component={FunctionsOverviewPage} />
-              <Route path="/:userId/overview/:functionName/log" component={FunctionLogPage} />
+              <Route exact path="/" component={FunctionsOverviewPage} />
+              <Route path="/:functionName/log" component={FunctionLogPage} />
               <Route component={NotFoundPage} />
             </Switch>
           </div>
-        </BrowserRouter>
-        <p>
-          Powered by <a href="https://www.openfaas.com">OpenFaaS</a>
-        </p>
-      </div>
+          <p>
+            Powered by <a href="https://www.openfaas.com">OpenFaaS</a>
+          </p>
+        </div>
+      </BrowserRouter>
     );
   }
 }

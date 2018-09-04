@@ -16,7 +16,7 @@ function renderBody(fns) {
     return fns.map((fn, i) => {
       const { shortName, gitRepo, shortSha, gitSha, gitOwner, endpoint, sinceDuration, invocationCount, replicas } = fn;
 
-      const logPath = `overview/${shortName}/log?repoPath=${gitOwner}/${gitRepo}&commitSHA=${gitSha}`;
+      const logPath = `${shortName}/log?repoPath=${gitOwner}/${gitRepo}&commitSHA=${gitSha}`;
 
       const repoUrl = `https://github.com/${gitOwner}/${gitRepo}/commits/master`;
       return (
@@ -48,7 +48,9 @@ function renderBody(fns) {
 export const FunctionTable = ({ isLoading, fns }) => {
   const tbody = isLoading ? (
     <tr>
-      <td>Loading...</td>
+      <td colSpan="8" style={{ textAlign: 'center' }}>
+        <FontAwesomeIcon icon="spinner" spin />
+      </td>
     </tr>
   ) : (
     renderBody(fns)
