@@ -19,8 +19,8 @@ export class App extends Component {
           <NavBar />
           <div>
             <Switch>
-              <Route exact path="/" component={FunctionsOverviewPage} />
-              <Route path="/:functionName/log" component={FunctionLogPage} />
+              <Route exact path="/:user" component={FunctionsOverviewPage} />
+              <Route path="/:user/:functionName/log" component={FunctionLogPage} />
               <Route component={NotFoundPage} />
             </Switch>
           </div>

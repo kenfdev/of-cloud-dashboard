@@ -6,6 +6,15 @@
 .navbar-inverse .navbar-text {
   color: #fff;
 }
+.navbar-inverse .navbar-nav > li > a:hover,
+.navbar-inverse .navbar-nav > li > a:focus {
+  color: #9cd3ff;
+  background-color: transparent;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+  color: #fff;
+}
 
 .navbar-inverse .navbar-nav > .active > a,
 .navbar-inverse .navbar-nav > .active > a:hover,

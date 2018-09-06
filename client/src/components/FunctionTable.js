@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { Link } from 'react-router-dom';
 
-function renderBody(fns) {
+function renderBody(fns, user) {
   if (fns.length === 0) {
     return (
       <tr>
@@ -14,9 +14,19 @@ function renderBody(fns) {
     );
   } else {
     return fns.map((fn, i) => {
-      const { shortName, gitRepo, shortSha, gitSha, gitOwner, endpoint, sinceDuration, invocationCount, replicas } = fn;
+      const {
+        shortName,
+        gitRepo,
+        shortSha,
+        gitSha,
+        gitOwner,
+        endpoint,
+        sinceDuration,
+        invocationCount,
+        replicas,
+      } = fn;
 
-      const logPath = `${shortName}/log?repoPath=${gitOwner}/${gitRepo}&commitSHA=${gitSha}`;
+      const logPath = `${user}/${shortName}/log?repoPath=${gitOwner}/${gitRepo}&commitSHA=${gitSha}`;
 
       const repoUrl = `https://github.com/${gitOwner}/${gitRepo}/commits/master`;
       return (
@@ -45,7 +55,7 @@ function renderBody(fns) {
   }
 }
 
-export const FunctionTable = ({ isLoading, fns }) => {
+export const FunctionTable = ({ isLoading, fns, user }) => {
   const tbody = isLoading ? (
     <tr>
       <td colSpan="8" style={{ textAlign: 'center' }}>
@@ -53,7 +63,7 @@ export const FunctionTable = ({ isLoading, fns }) => {
       </td>
     </tr>
   ) : (
-    renderBody(fns)
+    renderBody(fns, user)
   );
   return (
     <div className="table-responsive-sm table-responsive-md">
