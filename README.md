@@ -13,6 +13,8 @@ Prerequisites:
 Setup:
 
 ```bash
+# Move to the client directory
+cd client
 # Install dependencies
 yarn
 ```
