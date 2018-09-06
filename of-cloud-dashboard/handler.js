@@ -31,15 +31,8 @@ module.exports = (event, context) => {
     headers['Content-Type'] = 'text/html';
     content = fs.readFileSync(`${__dirname}/dist/index.html`).toString();
 
-    const { public_url, pretty_url, query_pretty_url } = process.env;
-    if (query_pretty_url === 'true') {
-      content = content.replace(/__BASE_HREF__/g, '/of-cloud-dashboard/');
-    } else {
-      content = content.replace(
-        /__BASE_HREF__/g,
-        '/function/of-cloud-dashboard/'
-      );
-    }
+    const { base_href, public_url, pretty_url, query_pretty_url } = process.env;
+    content = content.replace(/__BASE_HREF__/g, base_href);
     content = content.replace(/__PUBLIC_URL__/g, public_url);
     content = content.replace(/__PRETTY_URL__/g, pretty_url);
     content = content.replace(/__QUERY_PRETTY_URL__/g, query_pretty_url);

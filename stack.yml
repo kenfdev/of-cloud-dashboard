@@ -6,9 +6,10 @@ functions:
   of-cloud-dashboard:
     lang: node8-express
     handler: ./of-cloud-dashboard
-    image: kenfdev/of-cloud-dashboard:latest
+    image: kenfdev/of-cloud-dashboard:0.9.1
     environment:
       write_debug: true
+      base_href: '/function/kenfdev-of-cloud-dashboard/'
       public_url: 'http://127.0.0.1:8080'
       # Comment out if not using public pretty-URL
       pretty_url: 'http://user.o6s.io/function'
