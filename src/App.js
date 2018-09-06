@@ -7,12 +7,12 @@ import { NavBar } from './components/NavBar';
 import { FunctionsOverviewPage } from './pages/FunctionsOverviewPage';
 import { FunctionLogPage } from './pages/FunctionLogPage';
 import { NotFoundPage } from './pages/NotFoundPage';
-import { Breadcrumbs } from './components/Breadcrumbs';
 
 export class App extends Component {
   render() {
+    // basename is injected from the server
     return (
-      <BrowserRouter>
+      <BrowserRouter basename={window.BASE_HREF}>
         <div className="container">
           <NavBar />
           <div>

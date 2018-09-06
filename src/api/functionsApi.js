@@ -4,14 +4,24 @@ import * as moment from 'moment';
 class FunctionsApi {
   constructor() {
     this.selectedRepo = '';
-    this.baseURL = 'https://ae-gw.team-serverless.xyz';
-    this.prettyDomain = '';
-    this.queryPrettyURL = '';
+    this.baseURL = window.PUBLIC_URL;
+    this.prettyDomain = window.PRETTY_URL;
+    this.queryPrettyUrl = window.QUERY_PRETTY_URL;
+
+    if (this.queryPrettyUrl) {
+      this.apiBaseUrl = '';
+    } else {
+      this.apiBaseUrl = '/function';
+    }
   }
 
   parseFunctionResponse({ data }, user) {
     data.sort((a, b) => {
-      if (!a || !b || (!a.labels['Git-DeployTime'] || !b.labels['Git-DeployTime'])) {
+      if (
+        !a ||
+        !b ||
+        (!a.labels['Git-DeployTime'] || !b.labels['Git-DeployTime'])
+      ) {
         return 0;
       }
       const sinceA = new Date(parseInt(a.labels['Git-DeployTime'], 10) * 1000);
@@ -26,7 +36,9 @@ class FunctionsApi {
     });
 
     return data.map(item => {
-      const since = new Date(parseInt(item.labels['Git-DeployTime'], 10) * 1000);
+      const since = new Date(
+        parseInt(item.labels['Git-DeployTime'], 10) * 1000
+      );
       const sinceDuration = moment(since).fromNow();
 
       let shortName = item.name;
@@ -36,8 +48,10 @@ class FunctionsApi {
 
       let endpoint;
 
-      if (this.prettyDomain.length) {
-        endpoint = this.prettyDomain.replace('user', user).replace('function', shortName);
+      if (this.queryPrettyUrl) {
+        endpoint = this.prettyDomain
+          .replace('user', user)
+          .replace('function', shortName);
       } else {
         endpoint = this.baseURL + '/function/' + item.name;
       }
@@ -65,11 +79,15 @@ class FunctionsApi {
     });
   }
   fetchFunctions(user) {
-    return axios.get(`/function/list-functions?user=${user}`).then(res => this.parseFunctionResponse(res, user));
+    const url = `${this.apiBaseUrl}/list-functions?user=${user}`;
+    return axios.get(url).then(res => this.parseFunctionResponse(res, user));
   }
 
   fetchFunctionLog({ commitSHA, repoPath, functionName }) {
-    return axios.get(`/function/pipeline-log?commitSHA=${commitSHA}&repoPath=${repoPath}&function=${functionName}`).then(res => {
+    const url = `${
+      this.apiBaseUrl
+    }/function/pipeline-log?commitSHA=${commitSHA}&repoPath=${repoPath}&function=${functionName}`;
+    return axios.get(url).then(res => {
       return res.data;
     });
   }
