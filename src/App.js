@@ -11,8 +11,10 @@ import { NotFoundPage } from './pages/NotFoundPage';
 export class App extends Component {
   render() {
     // basename is injected from the server
+    const basename =
+      process.env.NODE_ENV === 'production' ? window.BASE_HREF : '/';
     return (
-      <BrowserRouter basename={window.BASE_HREF}>
+      <BrowserRouter basename={basename}>
         <div className="container">
           <NavBar />
           <div>

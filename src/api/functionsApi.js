@@ -6,7 +6,7 @@ class FunctionsApi {
     this.selectedRepo = '';
     this.baseURL = window.PUBLIC_URL;
     this.prettyDomain = window.PRETTY_URL;
-    this.queryPrettyUrl = window.QUERY_PRETTY_URL;
+    this.queryPrettyUrl = window.QUERY_PRETTY_URL === 'true';
 
     if (this.queryPrettyUrl) {
       this.apiBaseUrl = '';
@@ -86,7 +86,7 @@ class FunctionsApi {
   fetchFunctionLog({ commitSHA, repoPath, functionName }) {
     const url = `${
       this.apiBaseUrl
-    }/function/pipeline-log?commitSHA=${commitSHA}&repoPath=${repoPath}&function=${functionName}`;
+    }/pipeline-log?commitSHA=${commitSHA}&repoPath=${repoPath}&function=${functionName}`;
     return axios.get(url).then(res => {
       return res.data;
     });
