@@ -10,7 +10,7 @@ functions:
     environment:
       write_debug: true
       base_href: '/function/kenfdev-of-cloud-dashboard/'
-      public_url: 'http://127.0.0.1:8080'
+      public_url: 'https://ae-gw.team-serverless.xyz'
       # Comment out if not using public pretty-URL
       pretty_url: 'http://user.o6s.io/function'
       query_pretty_url: 'false'
