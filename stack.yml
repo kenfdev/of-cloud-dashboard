@@ -9,8 +9,8 @@ functions:
     image: kenfdev/of-cloud-dashboard:0.9.1
     environment:
       write_debug: true
-      base_href: '/function/kenfdev-of-cloud-dashboard/'
-      public_url: 'https://ae-gw.team-serverless.xyz'
+      base_href: '/of-cloud-dashboard/'
+      public_url: 'https://kenfdev.o6s.io'
       # Comment out if not using public pretty-URL
       pretty_url: 'https://user.o6s.io/function'
-      query_pretty_url: 'false'
+      query_pretty_url: 'true'
