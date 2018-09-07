@@ -26,4 +26,10 @@ Run Dev Server:
 yarn start
 ```
 
+Build and bundle the assets:
+
+```bash
+yarn run build
+```
+
 You can connect to the UI at http://localhost:3000. 
