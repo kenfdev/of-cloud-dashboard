@@ -8,7 +8,7 @@ class FunctionsApi {
     this.prettyDomain = window.PRETTY_URL;
     this.queryPrettyUrl = window.QUERY_PRETTY_URL === 'true';
 
-    this.apiBaseUrl = '/api';
+    this.apiBaseUrl = `${window.BASE_HREF}api`;
   }
 
   parseFunctionResponse({ data }, user) {
