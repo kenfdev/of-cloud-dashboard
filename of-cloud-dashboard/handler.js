@@ -1,11 +1,42 @@
 'use strict';
 
 const fs = require('fs');
+const request = require('request');
 
 module.exports = (event, context) => {
   const { method, path } = event;
+
   if (method !== 'GET') {
     context.status(400).fail('Bad Request');
+    return;
+  }
+
+  if (/^\/api\/(list-functions|pipeline-log).*/.test(path)) {
+    // proxy api requests to the gateway
+    const gatewayUrl = process.env.gateway_url.replace(/\/$/, '');
+    const proxyPath = path.replace(/^\/api\//, '');
+    const url = `${gatewayUrl}/function/${proxyPath}`;
+    console.log(`proxying request to: ${url}`);
+    request(
+      {
+        url,
+        method,
+        headers: event.headers,
+        qs: event.query,
+      },
+      (err, response, body) => {
+        console.log('proxy response code:', response.statusCode);
+        if (err) {
+          console.log('Proxy request failed', err);
+          context.status(500).fail('Proxy Request Failed');
+          return;
+        }
+        context
+          .headers(response.headers)
+          .status(response.statusCode)
+          .succeed(body);
+      }
+    );
     return;
   }
 

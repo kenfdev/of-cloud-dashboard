@@ -23,7 +23,7 @@
     "eject": "react-scripts eject"
   },
   "proxy": {
-    "/function": {
+    "/api": {
       "target": "https://ae-gw.team-serverless.xyz",
       "secure": false,
       "changeOrigin": true

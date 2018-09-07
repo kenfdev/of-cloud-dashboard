@@ -8,11 +8,7 @@ class FunctionsApi {
     this.prettyDomain = window.PRETTY_URL;
     this.queryPrettyUrl = window.QUERY_PRETTY_URL === 'true';
 
-    if (this.queryPrettyUrl) {
-      this.apiBaseUrl = '';
-    } else {
-      this.apiBaseUrl = '/function';
-    }
+    this.apiBaseUrl = '/api';
   }
 
   parseFunctionResponse({ data }, user) {
