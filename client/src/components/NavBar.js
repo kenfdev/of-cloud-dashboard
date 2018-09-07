@@ -4,15 +4,33 @@ import './NavBar.css';
 import { NavLink, withRouter, matchPath } from 'react-router-dom';
 
 class NavBarWithRouter extends Component {
+  createNavLink(pathname, user) {
+    if (!user) {
+      return null;
+    }
+
+    const to = `/${user}`;
+    return (
+      <li className={pathname === to ? 'active' : null}>
+        <NavLink to={`/${user}`} exact>
+          Home
+        </NavLink>
+      </li>
+    );
+  }
+
   render() {
     const { pathname } = this.props.history.location;
     const match = matchPath(pathname, {
       path: '/:user',
       strict: false,
     });
-    const { user } = match.params;
+    let user;
+    if (match && match.params) {
+      user = match.params.user;
+    }
 
-    const to = `/${user}`;
+    const navLink = this.createNavLink(pathname, user);
     return (
       <nav className="navbar navbar-inverse">
         <div className="container-fluid">
@@ -27,13 +45,7 @@ class NavBarWithRouter extends Component {
               OpenFaaS
             </a>
           </div>
-          <ul className="nav navbar-nav">
-            <li className={pathname === to ? 'active' : null}>
-              <NavLink to={`/${user}`} exact activeClassName="active">
-                Home
-              </NavLink>
-            </li>
-          </ul>
+          <ul className="nav navbar-nav">{navLink}</ul>
         </div>
       </nav>
     );
