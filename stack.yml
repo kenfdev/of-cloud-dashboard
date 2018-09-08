@@ -3,14 +3,14 @@ provider:
   gateway: http://127.0.0.1:8080
 
 functions:
-  of-cloud-dashboard:
+  dashboard:
     lang: node8-express
     handler: ./of-cloud-dashboard
     image: kenfdev/of-cloud-dashboard:0.9.2
     environment:
       write_debug: true
       gateway_url: http://gateway.openfaas:8080/
-      base_href: '/of-cloud-dashboard/'
+      base_href: '/dashboard/'
       public_url: https://kenfdev.o6s.io
       # Comment out if not using public pretty-URL
       pretty_url: https://user.o6s.io/function
