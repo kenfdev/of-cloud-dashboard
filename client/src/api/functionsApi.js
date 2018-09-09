@@ -1,5 +1,5 @@
 import axios from 'axios';
-import * as moment from 'moment';
+import moment from 'moment';
 
 class FunctionsApi {
   constructor() {
@@ -8,7 +8,8 @@ class FunctionsApi {
     this.prettyDomain = window.PRETTY_URL;
     this.queryPrettyUrl = window.QUERY_PRETTY_URL === 'true';
 
-    this.apiBaseUrl = `${window.BASE_HREF}api`;
+    this.apiBaseUrl =
+      process.env.NODE_ENV === 'production' ? `${window.BASE_HREF}api` : '/api';
   }
 
   parseFunctionResponse({ data }, user) {
@@ -31,16 +32,15 @@ class FunctionsApi {
       return 0;
     });
 
+    const userPrefixRegex = new RegExp(`^${user}-`);
+
     return data.map(item => {
       const since = new Date(
         parseInt(item.labels['Git-DeployTime'], 10) * 1000
       );
       const sinceDuration = moment(since).fromNow();
 
-      let shortName = item.name;
-      if (shortName.indexOf('-') > -1) {
-        shortName = shortName.substr(shortName.indexOf('-') + 1);
-      }
+      const shortName = item.name.replace(userPrefixRegex, '');
 
       let endpoint;
 

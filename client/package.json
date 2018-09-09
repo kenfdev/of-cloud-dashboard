@@ -24,7 +24,10 @@
   },
   "proxy": {
     "/api": {
-      "target": "https://ae-gw.team-serverless.xyz",
+      "pathRewrite": {
+        "^/api": "/"
+      },
+      "target": "https://system.o6s.io",
       "secure": false,
       "changeOrigin": true
     }
