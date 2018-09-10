@@ -66,7 +66,7 @@ export const FunctionTable = ({ isLoading, fns, user }) => {
     renderBody(fns, user)
   );
   return (
-    <div className="table-responsive-sm table-responsive-md">
+    <div className="table-responsive">
       <table className="table">
         <thead>
           <tr>
