@@ -39,5 +39,34 @@ describe('functionsApi', () => {
       const [actual] = response;
       expect(actual.shortName).toEqual('some-function');
     });
+    it('reorders the function with the Git-DeployTime to be newest first', async () => {
+      // Arrange
+      const functionResponse1 = {
+        ...baseFunction,
+        labels: { ...baseFunctionLabels },
+      };
+      functionResponse1.name = `${user}-older-function`;
+      functionResponse1.labels['Git-DeployTime'] = '1500000000';
+
+      const functionResponse2 = {
+        ...baseFunction,
+        labels: { ...baseFunctionLabels },
+      };
+      functionResponse2.name = `${user}-newer-function`;
+      functionResponse2.labels['Git-DeployTime'] = '1500000001';
+
+      axios.get.mockImplementation(() =>
+        Promise.resolve({ data: [functionResponse1, functionResponse2] })
+      );
+
+      // Act
+      const response = await functionsApi.fetchFunctions(user);
+
+      // Assert
+      const [first, second] = response;
+      // Check that the newer function comes first
+      expect(first.name).toEqual(functionResponse2.name);
+      expect(second.name).toEqual(functionResponse1.name);
+    });
   });
 });

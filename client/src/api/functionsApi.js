@@ -21,15 +21,10 @@ class FunctionsApi {
       ) {
         return 0;
       }
-      const sinceA = new Date(parseInt(a.labels['Git-DeployTime'], 10) * 1000);
-      var sinceB = new Date(parseInt(b.labels['Git-DeployTime'], 10) * 1000);
-
-      if (sinceA > sinceB) {
-        return 1;
-      } else if (sinceB > sinceA) {
-        return -1;
-      }
-      return 0;
+      return (
+        parseInt(b.labels['Git-DeployTime'], 10) -
+        parseInt(a.labels['Git-DeployTime'], 10)
+      );
     });
 
     const userPrefixRegex = new RegExp(`^${user}-`);
