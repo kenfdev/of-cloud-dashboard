@@ -35,14 +35,14 @@ class NavBarWithRouter extends Component {
       <nav className="navbar navbar-inverse">
         <div className="container-fluid">
           <div className="navbar-header">
-            <a className="navbar-brand" href="#">
+            <div className="navbar-brand">
               <img
                 alt="OpenFaaS"
                 src="https://docs.openfaas.com/images/logo.svg"
               />
-            </a>
+            </div>
             <p className="navbar-text">
-              <a href="#">OpenFaaS Cloud</a>
+              <div>OpenFaaS Cloud</div>
             </p>
           </div>
           <ul className="nav navbar-nav">{navLink}</ul>
