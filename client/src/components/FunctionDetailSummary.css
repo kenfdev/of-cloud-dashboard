@@ -14,6 +14,7 @@
   }
   .fn-detail-summary .dl-horizontal dt {
     padding-bottom: 5px;
+    text-align: left;
   }
   .fn-detail-summary .dl-horizontal dd {
     overflow-wrap: break-word;

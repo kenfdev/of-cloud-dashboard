@@ -1,10 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import './FunctionDetailSummary.css';
 
 export const FunctionDetailSummary = ({ fn }) => {
+  const to = `${fn.shortName}/log?repoPath=${fn.gitOwner}/${
+    fn.gitRepo
+  }&commitSHA=${fn.gitSha}`;
   const repo = `${fn.gitOwner}/${fn.gitRepo}`;
   return (
     <div className="fn-detail-summary row">
@@ -12,6 +16,11 @@ export const FunctionDetailSummary = ({ fn }) => {
         <div className="panel panel-default fn-detail-deployment">
           <div className="panel-body">
             <div>
+              <div className="pull-right">
+                <Link className="btn btn-default" to={to}>
+                  <FontAwesomeIcon icon="folder-open" /> Build Logs
+                </Link>
+              </div>
               <h4>
                 Deployment <FontAwesomeIcon icon="info-circle" />
               </h4>
