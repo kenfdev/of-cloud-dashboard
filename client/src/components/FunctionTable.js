@@ -27,11 +27,14 @@ function renderBody(fns, user) {
       } = fn;
 
       const logPath = `${user}/${shortName}/log?repoPath=${gitOwner}/${gitRepo}&commitSHA=${gitSha}`;
+      const fnDetailPath = `${user}/${shortName}?repoPath=${gitOwner}/${gitRepo}`;
 
       const repoUrl = `https://github.com/${gitOwner}/${gitRepo}/commits/master`;
       return (
         <tr key={i}>
-          <td>{shortName}</td>
+          <td>
+            <Link to={fnDetailPath}>{shortName}</Link>
+          </td>
           <td>
             <a href={repoUrl}>{gitRepo}</a>
           </td>

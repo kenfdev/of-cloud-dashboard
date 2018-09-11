@@ -4,12 +4,18 @@ import moment from 'moment';
 class FunctionsApi {
   constructor() {
     this.selectedRepo = '';
-    this.baseURL = window.PUBLIC_URL;
     this.prettyDomain = window.PRETTY_URL;
     this.queryPrettyUrl = window.QUERY_PRETTY_URL === 'true';
 
-    this.apiBaseUrl =
-      process.env.NODE_ENV === 'production' ? `${window.BASE_HREF}api` : '/api';
+    if (process.env.NODE_ENV === 'production') {
+      this.baseURL = window.PUBLIC_URL;
+      this.apiBaseUrl = `${window.BASE_HREF}api`;
+    } else {
+      this.baseURL = 'http://localhost:8080';
+      this.apiBaseUrl = '/api';
+    }
+
+    this.cachedFunctions = {};
   }
 
   parseFunctionResponse({ data }, user) {
@@ -71,7 +77,36 @@ class FunctionsApi {
   }
   fetchFunctions(user) {
     const url = `${this.apiBaseUrl}/list-functions?user=${user}`;
-    return axios.get(url).then(res => this.parseFunctionResponse(res, user));
+    return axios
+      .get(url)
+      .then(res => this.parseFunctionResponse(res, user))
+      .then(data => {
+        this.cachedFunctions = data.reduce((cache, fn) => {
+          cache[`${user}/${fn.gitOwner}/${fn.gitRepo}/${fn.shortName}`] = fn;
+          return cache;
+        }, {});
+        return data;
+      });
+  }
+
+  fetchFunction(user, gitRepo, fnShortname) {
+    return new Promise((resolve, reject) => {
+      const key = `${user}/${gitRepo}/${fnShortname}`;
+
+      const cachedFn = this.cachedFunctions[key];
+      if (cachedFn) {
+        resolve(cachedFn);
+        return;
+      }
+
+      // fetch functions if cache not found
+      this.fetchFunctions(user).then(() => {
+        const fn = this.cachedFunctions[key];
+        fn !== undefined
+          ? resolve(fn)
+          : reject(new Error(`Function ${key} not found`));
+      });
+    });
   }
 
   fetchFunctionLog({ commitSHA, repoPath, functionName }) {
