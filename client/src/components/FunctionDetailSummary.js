@@ -12,7 +12,7 @@ const renderContainerImage = image => {
   if (parts.length === 2) {
     return (
       <a
-        href={`https://hub.docker.com/r/${parts[0]}/${parts[1]}`}
+        href={`https://hub.docker.com/r/${parts[0]}/${parts[1]}/tags`}
         target="_blank"
       >
         {image}
