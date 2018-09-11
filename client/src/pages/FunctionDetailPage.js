@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import queryString from 'query-string';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -27,21 +28,37 @@ export class FunctionDetailPage extends Component {
     });
   }
   render() {
-    const { isLoading, fn } = this.state;
+    const { isLoading, fn, functionName, user, repoPath } = this.state;
+
+    let panelBody;
     if (isLoading) {
-      return (
-        <div style={{ textAlign: 'center' }}>
-          <FontAwesomeIcon icon="spinner" spin />{' '}
+      panelBody = (
+        <div className="panel-body">
+          <div style={{ textAlign: 'center' }}>
+            <FontAwesomeIcon icon="spinner" spin />{' '}
+          </div>
+        </div>
+      );
+    } else {
+      const to = `${fn.shortName}/log?repoPath=${repoPath}&commitSHA=${
+        fn.gitSha
+      }`;
+      panelBody = (
+        <div className="panel-body">
+          <FunctionDetailSummary fn={fn} />
+          <div className="pull-right">
+            <Link className="btn btn-default" to={to}>
+              <FontAwesomeIcon icon="folder-open" /> View Logs
+            </Link>
+          </div>
         </div>
       );
     }
 
     return (
       <div className="panel panel-success">
-        <div className="panel-heading">Function Detail for {fn.shortName}</div>
-        <div className="panel-body">
-          <FunctionDetailSummary fn={fn} />
-        </div>
+        <div className="panel-heading">Function Detail for {functionName}</div>
+        {panelBody}
       </div>
     );
   }

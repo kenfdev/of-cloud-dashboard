@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import queryString from 'query-string';
 
-import { NavLink, withRouter, matchPath } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 
 import './Breadcrumbs.css';
 
