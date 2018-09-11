@@ -66,11 +66,6 @@ class BreadcrumbsWithRouter extends Component {
     });
 
     let breadcrumbClassName = 'breadcrumb';
-    if (parts.length <= 1) {
-      // hide the breadcrumb at root
-      breadcrumbClassName += ' invisible';
-    }
-
     return <ol className={breadcrumbClassName}>{links}</ol>;
   }
 }

@@ -24,10 +24,7 @@ export class FunctionsOverviewPage extends Component {
     return (
       <div className="panel panel-success">
         <div className="panel-heading">Functions</div>
-        <div className="panel-body">
-          <p>
-            Welcome <span id="username">{user}</span>
-          </p>
+        <div className="panel-body">          
           <FunctionTable
             isLoading={this.state.isLoading}
             fns={this.state.fns}
