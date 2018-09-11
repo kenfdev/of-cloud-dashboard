@@ -1,14 +1,12 @@
-.function-detail-summary div[class^='col-md-'],
-.function-detail-summary div[class*=' col-md-'] {
-}
 .invocation-count .panel-body p {
-  font-size: 40px;
+  font-size: 45px;
+  font-weight: bold;
   text-align: center;
-  padding-top: 10px;
+  padding-top: 20px;
 }
 @media (min-width: 768px) {
   .function-detail-summary .panel-body {
-    min-height: 150px;
+    min-height: 170px;
     padding: 5px 15px;
   }
   .function-detail-summary .dl-horizontal dt {

@@ -36,6 +36,13 @@ export class FunctionDetailPage extends Component {
       );
     }
 
-    return <FunctionDetailSummary fn={fn} />;
+    return (
+      <div className="panel panel-success">
+        <div className="panel-heading">Function Detail for {fn.shortName}</div>
+        <div className="panel-body">
+          <FunctionDetailSummary fn={fn} />
+        </div>
+      </div>
+    );
   }
 }
