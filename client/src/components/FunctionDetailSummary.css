@@ -11,9 +11,11 @@
   }
   .function-detail-summary .dl-horizontal dt {
     width: 100px;
+    padding-bottom: 5px;
   }
   .function-detail-summary .dl-horizontal dd {
     margin-left: 105px;
     overflow-wrap: break-word;
+    padding-bottom: 5px;
   }
 }

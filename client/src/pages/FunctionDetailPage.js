@@ -23,12 +23,11 @@ export class FunctionDetailPage extends Component {
     const { user, repoPath, functionName } = this.state;
     this.setState({ isLoading: true });
     functionsApi.fetchFunction(user, repoPath, functionName).then(res => {
-      console.log('fn', res);
       this.setState({ isLoading: false, fn: res });
     });
   }
   render() {
-    const { isLoading, fn, functionName, user, repoPath } = this.state;
+    const { isLoading, fn, repoPath } = this.state;
 
     let panelBody;
     if (isLoading) {
@@ -57,7 +56,7 @@ export class FunctionDetailPage extends Component {
 
     return (
       <div className="panel panel-success">
-        <div className="panel-heading">Function Detail for {functionName}</div>
+        <div className="panel-heading">Function Overview</div>
         {panelBody}
       </div>
     );

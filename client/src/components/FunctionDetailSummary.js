@@ -13,7 +13,7 @@ export const FunctionDetailSummary = ({ fn }) => {
           <div className="panel-body">
             <div>
               <h4>
-                Summary <FontAwesomeIcon icon="info-circle" />
+                Deployment <FontAwesomeIcon icon="info-circle" />
               </h4>
             </div>
             <dl className="dl-horizontal">
