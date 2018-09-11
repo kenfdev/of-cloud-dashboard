@@ -7,9 +7,9 @@ import './FunctionDetailSummary.css';
 export const FunctionDetailSummary = ({ fn }) => {
   const repo = `${fn.gitOwner}/${fn.gitRepo}`;
   return (
-    <div className="function-detail-summary row">
+    <div className="fn-detail-summary row">
       <div className="col-md-5">
-        <div className="panel panel-default">
+        <div className="panel panel-default fn-detail-deployment">
           <div className="panel-body">
             <div>
               <h4>
@@ -34,7 +34,7 @@ export const FunctionDetailSummary = ({ fn }) => {
         </div>
       </div>
       <div className="col-md-5">
-        <div className="panel panel-default">
+        <div className="panel panel-default fn-detail-git">
           <div className="panel-body">
             <div>
               <h4>
