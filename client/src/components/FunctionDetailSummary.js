@@ -5,6 +5,24 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import './FunctionDetailSummary.css';
 
+const renderContainerImage = image => {
+  const imageWithoutTag = image.split(':')[0];
+  const parts = imageWithoutTag.split('/');
+
+  if (parts.length === 2) {
+    return (
+      <a
+        href={`https://hub.docker.com/r/${parts[0]}/${parts[1]}`}
+        target="_blank"
+      >
+        {image}
+      </a>
+    );
+  } else {
+    return image;
+  }
+};
+
 export const FunctionDetailSummary = ({ fn }) => {
   const to = `${fn.shortName}/log?repoPath=${fn.gitOwner}/${
     fn.gitRepo
@@ -29,7 +47,7 @@ export const FunctionDetailSummary = ({ fn }) => {
               <dt>Name:</dt>
               <dd>{fn.shortName}</dd>
               <dt>Image:</dt>
-              <dd>{fn.image}</dd>
+              <dd>{renderContainerImage(fn.image)}</dd>
               <dt>Endpoint:</dt>
               <dd>
                 <a href={fn.endpoint} target="_blank">
@@ -74,9 +92,9 @@ export const FunctionDetailSummary = ({ fn }) => {
         <div className="panel panel-default invocation-count">
           <div className="panel-body">
             <div>
-              <h5>
-                Invocation Count <FontAwesomeIcon icon="bolt" />
-              </h5>
+              <h4>
+                Invocations <FontAwesomeIcon icon="bolt" />
+              </h4>
             </div>
             <div>
               <p>{fn.invocationCount}</p>
