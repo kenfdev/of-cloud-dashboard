@@ -19,6 +19,8 @@ export const FunctionDetailSummary = ({ fn }) => {
             <dl className="dl-horizontal">
               <dt>Name:</dt>
               <dd>{fn.shortName}</dd>
+              <dt>Image:</dt>
+              <dd>{fn.image}</dd>
               <dt>Endpoint:</dt>
               <dd>
                 <a href={fn.endpoint} target="_blank">

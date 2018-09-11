@@ -62,6 +62,7 @@ class FunctionsApi {
 
       return {
         name: item.name,
+        image: item.image,
         shortName,
         endpoint,
         shortSha,
